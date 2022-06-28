@@ -6,7 +6,7 @@
 
 ## Getting Started
 
-You will need to setup your `.env` file in order for this to run locally
+You will need to setup your `.env` file in order for this to run locally.
 
 ```
 REACT_APP_DISCORD_ID = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
