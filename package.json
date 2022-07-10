@@ -22,7 +22,8 @@
     "dev": "next",
     "lint": "tsc && next lint",
     "start": "next start",
-    "test-docs": "yarn lint && bash scripts/test-docs.sh"
+    "test-docs": "yarn lint && bash scripts/test-docs.sh",
+    "gen:comp": "agrippa gen"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,7 @@
     "@next/bundle-analyzer": "^12.0.4",
     "@types/node": "^16.11.10",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "agrippa": "^1.4.0",
     "copy-webpack-plugin": "^10.0.0",
     "eslint": "<8.0.0",
     "eslint-config-next": "12.0.4",

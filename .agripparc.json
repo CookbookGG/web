@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/agripparc-1.4.json",
+  "styling": "none",
+  "baseDir": "./src/components",
+  "typescript": true,
+  "importReact": false,
+  "stylingModule": false,
+  "postCommand": "sh ./scripts/component-gen.sh <component-name> <dirPath> <componentPath>"
+}
