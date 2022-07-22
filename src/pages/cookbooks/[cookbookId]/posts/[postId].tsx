@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router';
 import { FunctionComponent } from 'react';
 
-export const PostsHome: FunctionComponent = () => {
+export const Post: FunctionComponent = () => {
   const router = useRouter();
-  const { cookbookId } = router.query;
+  const { cookbookId, postId } = router.query;
 
   return <></>;
 };
+
+export default Post;

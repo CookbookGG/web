@@ -5,7 +5,7 @@
  */
 
 const selector = 'link[data-name="eui-theme"]';
-export const defaultTheme = 'light';
+export const defaultTheme = 'dark';
 
 function getAllThemes(): HTMLLinkElement[] {
   // @ts-ignore

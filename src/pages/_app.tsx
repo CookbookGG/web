@@ -6,6 +6,8 @@ import { Global } from '@emotion/react';
 import Chrome from '../components/chrome';
 import { Theme } from '../components/theme';
 import { globalStyes } from '../styles/global.styles';
+import { SwipeableView } from '../components/SwipeableView';
+import { Sidebar } from '../components/Sidebar/Sidebar';
 
 /**
  * Next.js uses the App component to initialize pages. You can override it
@@ -24,7 +26,10 @@ const EuiApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => (
     <Theme>
       <Chrome>
         <EuiErrorBoundary>
-          <Component {...pageProps} />
+          <SwipeableView>
+            <Sidebar {...pageProps} />
+            <Component {...pageProps} />
+          </SwipeableView>
         </EuiErrorBoundary>
       </Chrome>
     </Theme>
