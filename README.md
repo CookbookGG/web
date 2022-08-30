@@ -6,13 +6,7 @@
 
 ## Getting Started
 
-You will need to setup your `.env` file in order for this to run locally.
-
-```
-REACT_APP_DISCORD_ID = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
-REACT_APP_API_URL = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
-```
 
 ### `yarn` to install dependencies
 
-### `yarn start` to start the application
+### `yarn dev` to start the application
