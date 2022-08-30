@@ -1,12 +1,9 @@
-import { useEuiTheme } from '@elastic/eui';
 import * as React from 'react';
 import { useSwipeable } from 'react-swipeable';
-import useStyles from '../hooks/useStyles';
 import { IStore, useStore } from '../store/store';
 import styles from './SwipeableView.styles';
 
 export const SwipeableView: React.FC = ({ children }) => {
-  const _styles = useStyles(styles);
   const { swipeLeft, swipeRight } = useStore((state: IStore) => state);
   const handlers = useSwipeable({
     onSwipedLeft: swipeLeft,
@@ -15,7 +12,7 @@ export const SwipeableView: React.FC = ({ children }) => {
   });
 
   return (
-    <div {...handlers} css={_styles.swipeableView}>
+    <div {...handlers} css={styles.swipeableView}>
       {children}
     </div>
   );

@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@elastic/eui": "^55.1.0",
+    "qs": "^6.11.0",
     "react-swipeable": "^7.0.0",
     "zustand": "^4.0.0-rc.4"
   },

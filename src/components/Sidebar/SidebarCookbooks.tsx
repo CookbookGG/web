@@ -1,19 +1,21 @@
-import { useEuiTheme } from '@elastic/eui';
+import Link from 'next/link';
 import * as React from 'react';
-import useStyles from '../../hooks/useStyles';
+import { useStore } from '../../store/store';
 import styles from './Sidebar.styles';
 
 const Cookbook = ({ cookbook }: { cookbook: any }) => {
-  const _styles = useStyles(styles);
-  return <div css={_styles.cookbook}>{cookbook.name}</div>;
+  return (
+    <Link href={`/cookbooks/${cookbook._id}`}>
+      <div css={styles.cookbook}>{cookbook.name}</div>
+    </Link>
+  );
 };
 
 export const SidebarCookbooks: React.FC = () => {
-  const _styles = useStyles(styles);
-  const cookbooks = [{ name: 'falcon' }];
+  const cookbooks = useStore(state => state.cookbooks);
 
   return (
-    <div css={_styles.cookbooks}>
+    <div css={styles.cookbooks}>
       {cookbooks.map((cb, i) => (
         <Cookbook key={i} cookbook={cb} />
       ))}

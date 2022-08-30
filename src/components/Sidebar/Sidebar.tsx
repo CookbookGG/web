@@ -1,15 +1,13 @@
 import * as React from 'react';
-import useStyles from '../../hooks/useStyles';
 import styles from './Sidebar.styles';
 import { SidebarCookbooks } from './SidebarCookbooks';
+import { SidebarMain } from './SidebarMain';
 
 export const Sidebar: React.FC = () => {
-  const _styles = useStyles(styles);
-
   return (
-    <div css={_styles.sidebar}>
+    <div css={styles.sidebar}>
       <SidebarCookbooks />
-      <div css={_styles.sidebarSections}></div>
+      <SidebarMain />
     </div>
   );
 };

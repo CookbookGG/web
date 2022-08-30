@@ -11,37 +11,51 @@ const sidebar = css({
 const sidebarSections = css({
   display: 'flex',
   flexDirection: 'column',
-  padding: 16,
   backgroundColor: Colors.backgroundDark,
   width: 300,
   height: '100%',
-  borderTopLeftRadius: 8,
-  borderBottomLeftRadius: 8,
-  marginLeft: 8,
+  padding: 8,
 });
 
 const cookbooks = css({
   display: 'flex',
   flexDirection: 'column',
-  padding: 16,
+  alignItems: 'center',
   backgroundColor: Colors.backgroundDark200,
-  width: 84,
+  width: 72,
   height: '100%',
-  borderTopRightRadius: 8,
-  borderBottomRightRadius: 8,
+  paddingTop: 8,
 });
 
-export default euiTheme => ({
+const cookbook = css({
+  width: 48,
+  height: 48,
+  borderRadius: '50%',
+  backgroundColor: Colors.backgroundAccent,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  margin: '4px 0',
+});
+
+const sidebarHeader = css({
+  width: '100%',
+  borderRadius: 4,
+});
+
+const sidebarContent = css({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  marginTop: 4,
+  overflow: 'hidden',
+});
+
+export default {
   sidebar,
+  sidebarHeader,
+  sidebarContent,
   sidebarSections,
   cookbooks,
-  cookbook: css({
-    width: 48,
-    height: 48,
-    borderRadius: 10,
-    backgroundColor: Colors.backgroundAccent,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }),
-});
+  cookbook,
+};
