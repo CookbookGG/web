@@ -4,7 +4,25 @@ import Colors from '../../styles/Colors';
 const treeNav = css({
   padding: 4,
   paddingTop: 8,
-  overflow: 'auto',
+  overflow: 'hidden',
+  color: Colors.text,
+  '&:hover': {
+    overflow: 'auto',
+  },
+  scrollbarWidth: 'auto',
+  scrollbarColor: `${Colors.text} ${Colors.backgroundDark}`,
+
+  '&::-webkit-scrollbar': {
+    width: 12,
+  },
+  '&::-webkit-scrollbar-track': {
+    background: Colors.backgroundDark,
+  },
+  '&::-webkit-scrollbar-thumb': {
+    backgroundColor: Colors.text,
+    borderRadius: 10,
+    border: `3px solid ${Colors.backgroundDark}`,
+  },
 });
 
 const nav = css({
