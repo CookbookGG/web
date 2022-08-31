@@ -11,6 +11,9 @@ const logoContainer = css({
   width: '50px',
   height: '50px',
   padding: 4,
+  ':hover': {
+    cursor: 'pointer',
+  },
 });
 
 const rightSection = css({

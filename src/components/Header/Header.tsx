@@ -24,16 +24,28 @@ import styles from './Header.styles';
 import Link from 'next/link';
 import logo from '../../../public/images/cookbook-logo.webp';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = () => {
+  const router = useRouter();
+  const onLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    router.push('/');
+  };
+
   return (
     <EuiHeader>
       <EuiHeaderSection grow={false}>
         <EuiHeaderSectionItem border="right">
           <div css={styles.logoContainer}>
-            <Image priority src={logo} layout="responsive" />
+            <Image
+              onClick={e => onLogoClick(e)}
+              priority
+              src={logo}
+              layout="responsive"
+            />
           </div>
         </EuiHeaderSectionItem>
         <EuiHeaderSectionItem>
