@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import Colors from '../../styles/Colors';
 
 const treeNav = css({
-  padding: 4,
+  padding: 0,
   paddingTop: 8,
   overflow: 'hidden',
   color: Colors.text,
@@ -27,7 +27,7 @@ const treeNav = css({
 
 const nav = css({
   cursor: 'pointer',
-  padding: 8,
+  padding: '8px 0',
   borderRadius: 4,
   fontSize: 16,
   display: 'flex',
@@ -47,7 +47,7 @@ const guide = css({
 });
 
 const item = css({
-  padding: '0 8px',
+  padding: '0',
   height: 32,
   borderRadius: 4,
   fontSize: 16,
@@ -57,14 +57,14 @@ const item = css({
 });
 
 const itemInner = css({
-  padding: '0 8px',
+  padding: '0 16px',
   height: 32,
   borderRadius: 4,
   fontSize: 16,
   display: 'flex',
   alignItems: 'center',
   lineHeight: '1.5',
-  marginLeft: 24,
+  marginLeft: 16,
   '&:hover': {
     color: Colors.white,
     backgroundColor: Colors.backgroundAccent,
