@@ -32,9 +32,11 @@ const nextConfig = {
    */
   basePath: pathPrefix,
 
+  /*
   images: {
     loader: 'custom',
   },
+  */
 
   /**
    * Set custom `process.env.SOMETHING` values to use in the application.
@@ -220,7 +222,13 @@ function derivePathPrefix() {
       const originUrl = gitConfig['remote "origin"'].url;
 
       // eslint-disable-next-line prettier/prettier
-      return '/' + originUrl.split('/').pop().replace(/\.git$/, '');
+      return (
+        '/' +
+        originUrl
+          .split('/')
+          .pop()
+          .replace(/\.git$/, '')
+      );
     }
   }
 

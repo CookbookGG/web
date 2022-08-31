@@ -11,6 +11,7 @@ import { Sidebar } from '../components/Sidebar/Sidebar';
 import HttpService from '../utils/HttpService';
 import { ROUTES } from '../constants/constants';
 import { useStore } from '../store/store';
+import { Header } from '../components/Header/Header';
 
 const init = async () => {
   const cookbooks = await HttpService.get(ROUTES.COOKBOOKS);
@@ -39,6 +40,7 @@ const EuiApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         <Chrome>
           <EuiErrorBoundary>
             <SwipeableView>
+              <Header {...pageProps} />
               <Sidebar {...pageProps} />
               <Component {...pageProps} />
             </SwipeableView>
