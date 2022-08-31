@@ -5,14 +5,17 @@ import {
   EuiDroppable,
   EuiIcon,
 } from '@elastic/eui';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useStore } from '../../store/store';
 import styles from './Treenav.styles';
 
 export const TreenavCategory = ({ guide, index, open }) => {
-  const { guides } = useStore(state => state);
+  const { cookbook, guides } = useStore(state => state);
   const [collapsed, setCollapsed] = React.useState<boolean>(!open);
   const isDragDisabled = true;
+
+  const router = useRouter();
 
   const onSectionDragEnd = async (
     { source, destination }: any,
@@ -78,8 +81,19 @@ export const TreenavCategory = ({ guide, index, open }) => {
                           customDragHandle
                           isDragDisabled={isDragDisabled}>
                           {provided => {
+                            console.log(section._id);
                             return (
-                              <div css={styles.itemInner} onClick={() => {}}>
+                              <div
+                                css={styles.itemInner}
+                                onClick={() => {
+                                  router.push(
+                                    `${cookbook._id}/recipes/${
+                                      guide._id
+                                    }/sections/${encodeURIComponent(
+                                      section.title
+                                    )}`
+                                  );
+                                }}>
                                 <span {...provided.dragHandleProps}>
                                   <EuiIcon type="document" css={styles.icon} />
                                 </span>

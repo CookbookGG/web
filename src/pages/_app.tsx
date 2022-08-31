@@ -32,7 +32,7 @@ const EuiApp: React.FC<AppProps> = ({ Component, pageProps }) => {
     <>
       <Head>
         {/* You can override this in other pages - see index.tsx for an example */}
-        <title>Next.js EUI Starter</title>
+        <title>CookBook</title>
       </Head>
       <Global styles={globalStyes} />
       <Theme>

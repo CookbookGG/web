@@ -31,6 +31,7 @@ export const Treenav: React.FC<TreeNavProps> = () => {
     if (!guides) return [];
     return guides.map((guide, index) => (
       <TreenavCategory
+        key={index}
         guide={guide}
         index={index}
         open={index === 0 || guides.length < 5}

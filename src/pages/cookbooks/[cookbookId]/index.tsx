@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { ROUTES } from '../../../constants/constants';
 import HttpService from '../../../utils/HttpService';
 import { useStore } from '../../../store/store';
+import { EuiText } from '@elastic/eui';
 
 const init = async (cookbookId?: string | string[]) => {
   if (cookbookId != null) {
@@ -20,7 +21,11 @@ export const CookbookHome: React.FC = () => {
     init(cookbookId);
   }, [cookbookId]);
 
-  return <></>;
+  return (
+    <>
+      <EuiText>You are in Cookbook: {cookbookId}</EuiText>
+    </>
+  );
 };
 
 export default CookbookHome;
