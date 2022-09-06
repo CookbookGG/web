@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { imageLoader } from '../../lib/loader';
+import logo from '../../images/logo.svg';
 
 import { AiOutlineUser } from 'react-icons/ai';
 
@@ -21,14 +22,7 @@ export const Header: React.FC<HeaderProps> = () => {
   return (
     <nav css={styles.nav}>
       <div css={styles.nav_logo}>
-        <Image
-          onClick={e => onLogoClick(e)}
-          priority
-          loader={imageLoader}
-          src="/images/cookbook-logo.webp"
-          width="50px"
-          height="50px"
-        />
+        <Image src={logo} onClick={e => onLogoClick(e)} loader={imageLoader} />
       </div>
       <ul css={styles.nav_item_container}>
         <li css={styles.nav_item}>
