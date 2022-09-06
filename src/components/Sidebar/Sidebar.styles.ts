@@ -21,20 +21,37 @@ const cookbooks = css({
   flexDirection: 'column',
   alignItems: 'center',
   backgroundColor: Colors.backgroundDark200,
-  width: 72,
+  width: 64,
   height: '100%',
   paddingTop: 8,
 });
 
-const cookbook = css({
-  width: 48,
-  height: 48,
-  borderRadius: '50%',
-  backgroundColor: Colors.backgroundAccent,
+const logo = css({
+  width: 36,
+  height: 36,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  margin: '8px 0',
+  cursor: 'pointer',
+});
+
+const spacer = css({
+  width: '65%',
+  height: 2,
+  backgroundColor: Colors.backgroundAccent,
   margin: '4px 0',
+});
+
+const cookbook = css({
+  width: 36,
+  height: 36,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  margin: '8px 0',
+  filter: `grayscale(100%)`,
+  cursor: 'pointer',
 });
 
 const sidebarHeader = css({
@@ -57,4 +74,6 @@ export default {
   sidebarSections,
   cookbooks,
   cookbook,
+  logo,
+  spacer,
 };

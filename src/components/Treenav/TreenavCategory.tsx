@@ -8,6 +8,7 @@ import {
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useStore } from '../../store/store';
+import { BiChevronRight, BiChevronDown } from 'react-icons/bi';
 import styles from './Treenav.styles';
 
 export const TreenavCategory = ({ guide, index, open }) => {
@@ -52,10 +53,11 @@ export const TreenavCategory = ({ guide, index, open }) => {
                 setCollapsed(!collapsed);
               }}>
               <span {...provided.dragHandleProps}>
-                <EuiIcon
-                  type={!collapsed ? 'folderOpen' : 'folderClosed'}
-                  css={styles.icon}
-                />
+                {!collapsed ? (
+                  <BiChevronDown css={styles.icon} />
+                ) : (
+                  <BiChevronRight css={styles.icon} />
+                )}
               </span>
               <span css={styles.title}>{guide.title}</span>
             </div>
