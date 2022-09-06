@@ -83,18 +83,21 @@ export const TreenavCategory = ({ guide, index, open }) => {
                           customDragHandle
                           isDragDisabled={isDragDisabled}>
                           {provided => {
-                            console.log(section._id);
                             return (
                               <div
                                 css={styles.itemInner}
                                 onClick={() => {
-                                  router.push(
-                                    `${cookbook._id}/recipes/${
-                                      guide._id
-                                    }/sections/${encodeURIComponent(
-                                      section.title
-                                    )}`
-                                  );
+                                  router.push({
+                                    pathname:
+                                      '/cookbooks/[cookbookId]/recipes/[recipeId]/sections/[sectionId]',
+                                    query: {
+                                      cookbookId: cookbook._id,
+                                      recipeId: guide._id,
+                                      sectionId: encodeURIComponent(
+                                        section.title
+                                      ),
+                                    },
+                                  });
                                 }}>
                                 <span {...provided.dragHandleProps}>
                                   <EuiIcon type="document" css={styles.icon} />

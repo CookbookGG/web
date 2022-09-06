@@ -24,6 +24,8 @@ axios.interceptors.response.use(
 
 class HttpService {
   async get(route, params?) {
+    console.log(route);
+    console.log(params);
     const res = await axios.get(route, {
       params,
       paramsSerializer: params => {
@@ -39,6 +41,8 @@ class HttpService {
   }
 
   async getById(route, id) {
+    console.log(route);
+    console.log(id);
     const res = await axios.get(route + '/' + id);
     return res.data;
   }
