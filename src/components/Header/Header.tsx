@@ -1,30 +1,13 @@
 import * as React from 'react';
-import {
-  EuiAvatar,
-  EuiDragDropContext,
-  euiDragDropReorder,
-  EuiDroppable,
-  EuiFlexGroup,
-  EuiFlexItem,
-  EuiHeader,
-  EuiHeaderLogo,
-  EuiHeaderSection,
-  EuiHeaderSectionItem,
-  EuiHeaderSectionItemButton,
-  EuiIcon,
-  EuiLink,
-  EuiPopover,
-  EuiSpacer,
-  EuiText,
-  useGeneratedHtmlId,
-} from '@elastic/eui';
-
 import Image from 'next/image';
 import styles from './Header.styles';
+import stylesPopup from './HeaderPopup.styles';
 import Link from 'next/link';
-import logo from '../../../public/images/cookbook-logo.webp';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { imageLoader } from '../../lib/loader';
+
+import { AiOutlineUser } from 'react-icons/ai';
 
 interface HeaderProps {}
 
@@ -36,54 +19,44 @@ export const Header: React.FC<HeaderProps> = () => {
   };
 
   return (
-    <EuiHeader>
-      <EuiHeaderSection grow={false}>
-        <EuiHeaderSectionItem border="right">
-          <div css={styles.logoContainer}>
-            <Image
-              onClick={e => onLogoClick(e)}
-              priority
-              src={logo}
-              layout="responsive"
-            />
-          </div>
-        </EuiHeaderSectionItem>
-        <EuiHeaderSectionItem>
-          <EuiText css={styles.leftSection}>
-            <Link href={'/'}>Home</Link>
-          </EuiText>
-        </EuiHeaderSectionItem>
-        <EuiHeaderSectionItem>
-          <EuiText css={styles.leftSection}>
-            <Link href={'/about'}>About</Link>
-          </EuiText>
-        </EuiHeaderSectionItem>
-      </EuiHeaderSection>
-
-      <EuiHeaderSection side="right" css={styles.rightSection}>
-        <EuiHeaderSectionItem>
-          <HeaderUserMenu />
-        </EuiHeaderSectionItem>
-      </EuiHeaderSection>
-    </EuiHeader>
+    <nav css={styles.nav}>
+      <div css={styles.nav_logo}>
+        <Image
+          onClick={e => onLogoClick(e)}
+          priority
+          loader={imageLoader}
+          src="/images/cookbook-logo.webp"
+          width="50px"
+          height="50px"
+        />
+      </div>
+      <ul css={styles.nav_item_container}>
+        <li css={styles.nav_item}>
+          <Link href={'/'}>Home</Link>
+        </li>
+        <li css={styles.nav_item}>
+          <Link href={'/about'}>About</Link>
+        </li>
+      </ul>
+      <ul css={[styles.nav_item_container, styles.nav_item_container_right]}>
+        <li css={styles.nav_item}>
+          <UserProfile />
+        </li>
+      </ul>
+    </nav>
   );
 };
 
-const HeaderUserMenu = () => {
-  const headerUserPopoverId = useGeneratedHtmlId({
-    prefix: 'headerUserPopover',
-  });
-
+const UserProfile = () => {
   const defaultUser = {
     name: 'William Andersson',
     role: 'Admin',
   };
-
   const [user, setUser] = useState(defaultUser);
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const onMenuButtonClick = () => {
     setIsOpen(!isOpen);
@@ -93,91 +66,58 @@ const HeaderUserMenu = () => {
     setIsOpen(false);
   };
 
-  const button = () => {
-    if (isLoggedIn) {
-      return (
-        <EuiHeaderSectionItemButton
-          aria-controls={headerUserPopoverId}
-          aria-expanded={isOpen}
-          aria-haspopup="true"
-          aria-label="Account menu"
-          onClick={onMenuButtonClick}>
-          <EuiAvatar name={user.name} size="s" />
-        </EuiHeaderSectionItemButton>
-      );
-    } else {
-      return (
-        <EuiHeaderSectionItemButton
-          aria-controls={headerUserPopoverId}
-          aria-expanded={isOpen}
-          aria-haspopup="true"
-          aria-label="Account menu"
-          onClick={onMenuButtonClick}>
-          <EuiIcon type={'user'} size="l" />
-        </EuiHeaderSectionItemButton>
-      );
+  const myRef = React.useRef(null);
+
+  const handleClickOutside = e => {
+    if (!myRef.current.contains(e.target)) {
+      if (isOpen) closeMenu();
     }
   };
 
-  const profilePopup = (
-    <EuiFlexGroup
-      gutterSize="m"
-      className="euiHeaderProfile"
-      responsive={false}>
-      <EuiFlexItem grow={false}>
-        <EuiAvatar name={user.name} size="xl" />
-      </EuiFlexItem>
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  });
 
-      <EuiFlexItem>
-        <EuiText size="m">
-          <p>{user.name}</p>
-        </EuiText>
-
-        <EuiText size="xs">
-          <p>Role: {user.role}</p>
-        </EuiText>
-
-        <EuiSpacer size="m" />
-
-        <EuiFlexGroup>
-          <EuiFlexItem>
-            <EuiFlexGroup justifyContent="spaceBetween">
-              <EuiFlexItem grow={false}>
-                <EuiLink>Edit profile</EuiLink>
-              </EuiFlexItem>
-
-              <EuiFlexItem grow={false}>
-                <EuiLink>Log out</EuiLink>
-              </EuiFlexItem>
-            </EuiFlexGroup>
-          </EuiFlexItem>
-        </EuiFlexGroup>
-      </EuiFlexItem>
-    </EuiFlexGroup>
+  const Button = (
+    <div onClick={onMenuButtonClick}>
+      <AiOutlineUser size={'24px'} />
+    </div>
   );
 
-  const loginPopup = (
-    <EuiFlexGroup
-      gutterSize="m"
-      className="euiHeaderProfile"
-      responsive={false}>
-      <EuiFlexItem>
-        <EuiText>
-          <Link href={'/login'}>Login / Sign up</Link>
-        </EuiText>
-      </EuiFlexItem>
-    </EuiFlexGroup>
+  const ProfilePopupContent = (
+    <>
+      <ul>
+        <li>Name: {user.name}</li>
+        <li>Role: {user.role}</li>
+      </ul>
+      <ul>
+        <li>
+          <Link href={'/profile'}>Profile</Link>
+        </li>
+        <li>
+          <Link href={'/logout'}>Log Out</Link>
+        </li>
+      </ul>
+    </>
+  );
+
+  const LoginPopupContent = (
+    <>
+      <Link href={'/login'}>Please Login</Link>
+    </>
   );
 
   return (
-    <EuiPopover
-      id={headerUserPopoverId}
-      button={button()}
-      isOpen={isOpen}
-      anchorPosition="downRight"
-      closePopover={closeMenu}
-      panelPaddingSize="none">
-      {isLoggedIn ? profilePopup : loginPopup}
-    </EuiPopover>
+    <div ref={myRef}>
+      {Button}
+      {isOpen ? (
+        <div css={stylesPopup.popup_container}>
+          {isLoggedIn ? ProfilePopupContent : LoginPopupContent}
+        </div>
+      ) : (
+        <></>
+      )}
+    </div>
   );
 };

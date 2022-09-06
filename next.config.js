@@ -32,11 +32,9 @@ const nextConfig = {
    */
   basePath: pathPrefix,
 
-  /*
   images: {
     loader: 'custom',
   },
-  */
 
   /**
    * Set custom `process.env.SOMETHING` values to use in the application.

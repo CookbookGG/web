@@ -1,38 +1,44 @@
 import { css } from '@emotion/react';
 import Colors from '../../styles/Colors';
 
-const header = css({
-  padding: 4,
-  paddingTop: 8,
-  overflow: 'auto',
+const nav = css({
+  display: 'flex',
+  width: '100%',
+  paddingLeft: 10,
+  paddingRight: 20,
+  backgroundColor: Colors.backgroundDark200,
 });
 
-const logoContainer = css({
-  width: '50px',
-  height: '50px',
-  padding: 4,
-  ':hover': {
-    cursor: 'pointer',
-  },
+const nav_item_container = css({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
 });
 
-const rightSection = css({
-  paddingRight: 12,
-});
-
-const leftSection = css({
-  paddingInline: 12,
-
-  a: {
+const nav_item = css({
+  padding: '10px 15px',
+  '& a': {
     textDecoration: 'none',
-    textDecorationLine: 'none',
     color: Colors.white,
   },
 });
 
+const nav_item_container_right = css({
+  marginLeft: 'auto',
+});
+
+const nav_logo = css({
+  width: '50px',
+  ':hover': {
+    cursor: 'pointer',
+  },
+  padding: '5px 0px',
+});
+
 export default {
-  header,
-  logoContainer,
-  rightSection,
-  leftSection,
+  nav,
+  nav_item_container,
+  nav_item_container_right,
+  nav_item,
+  nav_logo,
 };
