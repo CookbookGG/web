@@ -20,26 +20,28 @@ export const Section = () => {
     recipeId: string | string[],
     sectionId: string | string[]
   ) => {
-    console.log(router.query);
     let route = ROUTES.GUIDE(cookbookId, recipeId);
 
     // TODO: Should probably get the specific section from a section array, not the guide
 
-    await HttpService.get(route).then((guide: Guide) => {
-      useStore.getState().section = guide.sections.filter(
+    console.log(useStore.getState());
+
+    useStore.getState().guides.forEach(guide => {
+      const section = guide.sections.filter(
         (section: SectionModel) =>
           encodeURIComponent(section.title) == sectionId
       )[0];
 
-      setSection(useStore.getState().section);
-
-      console.log(useStore.getState());
+      if (section) {
+        useStore.setState({ section });
+        setSection(section);
+      }
     });
   };
 
   useEffect(() => {
     init(cookbookId, recipeId, sectionId);
-  }, [sectionId]);
+  }, [useStore.getState().section]);
 
   if (section) {
     return (

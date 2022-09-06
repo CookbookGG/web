@@ -11,7 +11,6 @@ import { Sidebar } from '../components/Sidebar/Sidebar';
 import HttpService from '../utils/HttpService';
 import { ROUTES } from '../constants/constants';
 import { useStore } from '../store/store';
-import { Guide } from '../models/Guide';
 
 const init = async () => {
   const cookbooks = await HttpService.get(ROUTES.COOKBOOKS);
@@ -23,12 +22,11 @@ const init = async () => {
     const guidesInCookbook = await HttpService.get(ROUTES.GUIDES(cookbook._id));
 
     guides = guides.concat(guidesInCookbook);
-    console.log(guides);
+
+    useStore.getState().updateGuides(guides);
   });
-
-  useStore.getState().updateGuides(guides);
-
-  console.log(useStore.getState());
+  
+  console.log("initing")
 };
 
 /**
@@ -39,7 +37,7 @@ const init = async () => {
  * @see https://nextjs.org/docs/advanced-features/custom-app
  */
 const EuiApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     init();
   }, []);
   return (

@@ -10,13 +10,22 @@ import * as React from 'react';
 import { useStore } from '../../store/store';
 import { BiChevronRight, BiChevronDown } from 'react-icons/bi';
 import styles from './Treenav.styles';
+import { useEffect } from 'react';
 
 export const TreenavCategory = ({ guide, index, open }) => {
-  const { cookbook, guides } = useStore(state => state);
+  const { cookbook, cookbooks, guides } = useStore(state => state);
   const [collapsed, setCollapsed] = React.useState<boolean>(!open);
   const isDragDisabled = true;
-
   const router = useRouter();
+
+  const { cookbookId } = router.query;
+
+  useEffect(() => {
+    if (!cookbook)
+      useStore().cookbook = cookbooks.find(
+        cookbook => cookbook._id == cookbookId
+      );
+  }, []);
 
   const onSectionDragEnd = async (
     { source, destination }: any,

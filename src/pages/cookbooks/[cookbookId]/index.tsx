@@ -11,8 +11,6 @@ const init = async (cookbookId?: string | string[]) => {
     const guides = await HttpService.get(ROUTES.GUIDES(cookbook._id));
     useStore.setState({ cookbook, guides });
   }
-
-  console.log(useStore.getState());
 };
 
 export const CookbookHome: React.FC = () => {
