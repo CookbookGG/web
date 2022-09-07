@@ -1,10 +1,5 @@
-const NODE_ENV = process.env.NODE_ENV;
-
-const isLocal = NODE_ENV === 'development';
-
 export const ENV = {
   API_URL: 'https://api.dev-cookbook.com',
-  TWITCH_PARENT: isLocal ? 'localhost' : window.location.host,
 };
 
 export const ROUTES = {
