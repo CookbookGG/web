@@ -13,26 +13,22 @@ import {
 import { useStore } from '../../../../store/store';
 import { useRouter } from 'next/router';
 import styles from './CookbookSection.styles';
+import { SectionModel } from '../../../../models/Section';
 
 interface CookbookSectionProps {
-  title: any;
-  body: any;
+  section: SectionModel;
 }
 
 export const CookbookSection: React.FC<CookbookSectionProps> = ({
-  title,
-  body,
+  section,
 }) => {
-  const { user } = useStore(state => state);
-  const router = useRouter();
-
   return (
-    <>
+    <div css={styles.container}>
       <EuiTitle>
-        <h2>{title}</h2>
+        <h2>{section.title}</h2>
       </EuiTitle>
       <EuiSpacer />
-      <EuiMarkdownFormat>{body}</EuiMarkdownFormat>
-    </>
+      <EuiMarkdownFormat>{section.body}</EuiMarkdownFormat>
+    </div>
   );
 };

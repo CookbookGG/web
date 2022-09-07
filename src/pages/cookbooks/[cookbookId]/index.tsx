@@ -4,6 +4,7 @@ import { ROUTES } from '../../../constants/constants';
 import HttpService from '../../../utils/HttpService';
 import { useStore } from '../../../store/store';
 import { EuiText } from '@elastic/eui';
+import { useEffect } from 'react';
 
 const init = async (cookbookId?: string | string[]) => {
   if (cookbookId != null) {
@@ -17,7 +18,7 @@ export const CookbookHome: React.FC = () => {
   const router = useRouter();
   const { cookbookId } = router.query;
 
-  React.useEffect(() => {
+  useEffect(() => {
     init(cookbookId);
   }, [cookbookId]);
 

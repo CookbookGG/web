@@ -1,30 +1,12 @@
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import { json } from 'stream/consumers';
+import { useEffect } from 'react';
 import { useStore } from '../../../../../../store/store';
 import { CookbookSection } from '../../../../../../components/Cookbook/CookbookGuide/CookbookSection/CookbookSection';
-import { ROUTES } from '../../../../../../constants/constants';
 import { SectionModel } from '../../../../../../models/Section';
-import HttpService from '../../../../../../utils/HttpService';
-import { Guide } from '../../../../../../models/Guide';
 
-export const Section = () => {
-  const router = useRouter();
-  const { cookbookId, recipeId, sectionId } = router.query;
-  const [section, setSection] = useState<SectionModel>(
-    useStore.getState().section
-  );
-
-  const init = async (
-    cookbookId: string | string[],
-    recipeId: string | string[],
-    sectionId: string | string[]
-  ) => {
-    let route = ROUTES.GUIDE(cookbookId, recipeId);
-
-    // TODO: Should probably get the specific section from a section array, not the guide
-
-    console.log(useStore.getState());
+const init = async (sectionId: string | string[]) => {
+  if (sectionId != null) {
+    // TODO: Should probably get the specific section from a section array, not the guides
 
     useStore.getState().guides.forEach(guide => {
       const section = guide.sections.filter(
@@ -33,20 +15,26 @@ export const Section = () => {
       )[0];
 
       if (section) {
+        // TODO: This state is not set before the component is rendered, but for some reason it is not re-rendered when the state is set. IDK why
         useStore.setState({ section });
-        setSection(section);
       }
     });
-  };
+  }
+};
+
+export const Section: React.FC = () => {
+  const router = useRouter();
+  const { sectionId } = router.query;
+  const { section } = useStore(state => state);
 
   useEffect(() => {
-    init(cookbookId, recipeId, sectionId);
-  }, [useStore.getState().section]);
+    init(sectionId);
+  }, [sectionId]);
 
   if (section) {
     return (
       <>
-        <CookbookSection title={section.title} body={section.body} />
+        <CookbookSection section={section} />
       </>
     );
   } else {
