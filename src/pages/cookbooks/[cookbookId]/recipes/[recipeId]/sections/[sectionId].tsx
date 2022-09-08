@@ -5,21 +5,19 @@ import { CookbookSection } from '../../../../../../components/Cookbook/CookbookG
 import { SectionModel } from '../../../../../../models/Section';
 
 const init = async (sectionId: string | string[]) => {
-  if (sectionId != null) {
-    // TODO: Should probably get the specific section from a section array, not the guides
+  if (!sectionId) return;
 
-    useStore.getState().guides.forEach(guide => {
-      const section = guide.sections.filter(
-        (section: SectionModel) =>
-          encodeURIComponent(section.title) == sectionId
-      )[0];
+  // TODO: Should probably get the specific section from a section array, not the guides
+  useStore.getState().guides.forEach(guide => {
+    const section = guide.sections.find(
+      (section: SectionModel) => encodeURIComponent(section.title) == sectionId
+    );
 
-      if (section) {
-        // TODO: This state is not set before the component is rendered, but for some reason it is not re-rendered when the state is set. IDK why
-        useStore.setState({ section });
-      }
-    });
-  }
+    if (section) {
+      // TODO: This state is not set before the component is rendered, but for some reason it is not re-rendered when the state is set. IDK why
+      useStore.setState({ section });
+    }
+  });
 };
 
 export const Section: React.FC = () => {
