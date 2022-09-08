@@ -6,6 +6,5 @@ export default {
     height: '100vh',
     width: '100vw',
     backgroundColor: Colors.background,
-    display: 'flex',
   }),
 };

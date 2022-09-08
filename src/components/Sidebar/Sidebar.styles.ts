@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import Colors from '../../styles/Colors';
 
 const sidebar = css({
+  position: 'absolute',
   height: '100vh',
   display: 'flex',
 });

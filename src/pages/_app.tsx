@@ -20,7 +20,8 @@ const init = async pathname => {
   const cookbookId = getCookBookIdIfExists(pathname);
 
   if (cookbookId) {
-    const cookbook = await HttpService.get(ROUTES.COOKBOOK(cookbookId));
+    const cookbook = cookbooks.find(cookbook => cookbook._id === cookbookId);
+
     useStore.setState({ cookbook });
   }
 
@@ -37,7 +38,7 @@ const init = async pathname => {
 
 const getCookBookIdIfExists = pathname => {
   const pathArray = pathname.split('/');
-  let cookbookIndex = pathArray.findIndex(path => path == 'cookbooks');
+  const cookbookIndex = pathArray.findIndex(path => path === 'cookbooks');
   if (cookbookIndex >= 0 && pathArray[cookbookIndex + 1]) {
     return pathArray[cookbookIndex + 1];
   } else return null;

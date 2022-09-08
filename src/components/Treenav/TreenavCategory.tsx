@@ -32,6 +32,18 @@ export const TreenavCategory = ({ guide, index, open }) => {
     }
   };
 
+  const onSectionClick = async section => {
+    router.push({
+      pathname:
+        '/cookbooks/[cookbookId]/recipes/[recipeId]/sections/[sectionId]',
+      query: {
+        cookbookId: cookbook._id,
+        recipeId: guide._id,
+        sectionId: encodeURIComponent(section.title),
+      },
+    });
+  };
+
   if (!guide) return null;
 
   return (
@@ -85,18 +97,8 @@ export const TreenavCategory = ({ guide, index, open }) => {
                             return (
                               <div
                                 css={styles.itemInner}
-                                onClick={() => {
-                                  router.push({
-                                    pathname:
-                                      '/cookbooks/[cookbookId]/recipes/[recipeId]/sections/[sectionId]',
-                                    query: {
-                                      cookbookId: cookbook._id,
-                                      recipeId: guide._id,
-                                      sectionId: encodeURIComponent(
-                                        section.title
-                                      ),
-                                    },
-                                  });
+                                onClick={section => {
+                                  onSectionClick(section);
                                 }}>
                                 <span {...provided.dragHandleProps}>
                                   <EuiIcon type="document" css={styles.icon} />
