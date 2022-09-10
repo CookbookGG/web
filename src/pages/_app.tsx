@@ -12,6 +12,7 @@ import HttpService from '../utils/HttpService';
 import { ROUTES } from '../constants/constants';
 import { useStore } from '../store/store';
 import { useRouter } from 'next/router';
+import { Cookbook } from '../models/Cookbook';
 
 const init = async pathname => {
   const cookbooks = await HttpService.get(ROUTES.COOKBOOKS);
@@ -25,15 +26,19 @@ const init = async pathname => {
     useStore.setState({ cookbook });
   }
 
-  let guides = [];
+  let guidesTotal = [];
 
-  cookbooks.forEach(async cookbook => {
-    const guidesInCookbook = await HttpService.get(ROUTES.GUIDES(cookbook._id));
+  for (const cookbook of cookbooks) {
+    useStore.getState().setGuidesFromCookbookAPI(cookbook);
 
-    guides = guides.concat(guidesInCookbook);
+    const guidesInCookbook = useStore.getState().guides;
 
-    useStore.getState().updateGuides(guides);
-  });
+    guidesTotal = guidesTotal.concat(guidesInCookbook);
+  }
+
+  useStore.getState().updateGuides(guidesTotal);
+  // Feels dumb kinda doing this an extra time?
+  // IDK how we should separate the getting and setting when some is from api and some not
 };
 
 const getCookBookIdIfExists = pathname => {

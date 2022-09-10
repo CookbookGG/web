@@ -4,20 +4,16 @@ import { useStore } from '../../../../../../store/store';
 import { CookbookSection } from '../../../../../../components/Cookbook/CookbookGuide/CookbookSection/CookbookSection';
 import { SectionModel } from '../../../../../../models/Section';
 
-const init = async (sectionId: string | string[]) => {
+const init = async (sectionId: string) => {
   if (!sectionId) return;
 
-  // TODO: Should probably get the specific section from a section array, not the guides
-  useStore.getState().guides.forEach(guide => {
-    const section = guide.sections.find(
-      (section: SectionModel) => encodeURIComponent(section.title) == sectionId
-    );
+  useStore.getState().setSectionFromGuidesStore(sectionId);
+  const section = useStore.getState().section;
 
-    if (section) {
-      // TODO: This state is not set before the component is rendered, but for some reason it is not re-rendered when the state is set. IDK why
-      useStore.setState({ section });
-    }
-  });
+  if (section) {
+    // TODO: This state is not set before the component is rendered, but for some reason it is not re-rendered when the state is set. IDK why
+    useStore.setState({ section });
+  }
 };
 
 export const Section: React.FC = () => {
@@ -26,7 +22,7 @@ export const Section: React.FC = () => {
   const { section } = useStore(state => state);
 
   useEffect(() => {
-    init(sectionId);
+    init(sectionId?.toString());
   }, [sectionId]);
 
   if (section) {
@@ -35,9 +31,9 @@ export const Section: React.FC = () => {
         <CookbookSection section={section} />
       </>
     );
-  } else {
-    return <>Loading..</>;
   }
+
+  return <>Loading..</>;
 };
 
 export default Section;

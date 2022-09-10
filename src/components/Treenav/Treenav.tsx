@@ -11,9 +11,7 @@ import { useStore } from '../../store/store';
 import { useRouter } from 'next/router';
 import styles from './Treenav.styles';
 
-interface TreeNavProps {}
-
-export const Treenav: React.FC<TreeNavProps> = () => {
+export const Treenav: React.FC = () => {
   const { cookbook, user, guides } = useStore(state => state);
   const router = useRouter();
 

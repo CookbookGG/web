@@ -10,8 +10,20 @@ import * as React from 'react';
 import { useStore } from '../../store/store';
 import { BiChevronRight, BiChevronDown } from 'react-icons/bi';
 import styles from './Treenav.styles';
+import { SectionModel } from '../../models/Section';
+import { Guide } from '../../models/Guide';
 
-export const TreenavCategory = ({ guide, index, open }) => {
+interface TreenavCateGoryProps {
+  guide: Guide;
+  index: number;
+  open: boolean;
+}
+
+export const TreenavCategory: React.FC<TreenavCateGoryProps> = ({
+  guide,
+  index,
+  open,
+}: TreenavCateGoryProps) => {
   const { cookbook, cookbooks, guides } = useStore(state => state);
   const [collapsed, setCollapsed] = React.useState<boolean>(!open);
   const isDragDisabled = true;
@@ -32,7 +44,11 @@ export const TreenavCategory = ({ guide, index, open }) => {
     }
   };
 
-  const onSectionClick = async section => {
+  const onSectionClick = async (
+    event: React.MouseEvent,
+    section: SectionModel
+  ) => {
+    event.preventDefault(); // I've seen this used for a lot of onClick methods, does this do anything here/wanna explain what it is? LOL
     router.push({
       pathname:
         '/cookbooks/[cookbookId]/recipes/[recipeId]/sections/[sectionId]',
@@ -97,8 +113,8 @@ export const TreenavCategory = ({ guide, index, open }) => {
                             return (
                               <div
                                 css={styles.itemInner}
-                                onClick={section => {
-                                  onSectionClick(section);
+                                onClick={event => {
+                                  onSectionClick(event, section);
                                 }}>
                                 <span {...provided.dragHandleProps}>
                                   <EuiIcon type="document" css={styles.icon} />
