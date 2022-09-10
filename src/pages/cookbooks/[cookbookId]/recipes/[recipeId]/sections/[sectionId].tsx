@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useStore } from '../../../../../../store/store';
 import { CookbookSection } from '../../../../../../components/Cookbook/CookbookGuide/CookbookSection/CookbookSection';
-import { SectionModel } from '../../../../../../models/Section';
 
 const init = async (sectionId: string) => {
   if (!sectionId) return;

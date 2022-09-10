@@ -11,8 +11,6 @@ import { Sidebar } from '../components/Sidebar/Sidebar';
 import HttpService from '../utils/HttpService';
 import { ROUTES } from '../constants/constants';
 import { useStore } from '../store/store';
-import { useRouter } from 'next/router';
-import { Cookbook } from '../models/Cookbook';
 
 const init = async pathname => {
   const cookbooks = await HttpService.get(ROUTES.COOKBOOKS);

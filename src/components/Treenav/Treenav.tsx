@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  EuiDragDropContext,
-  euiDragDropReorder,
-  EuiDroppable,
-  EuiIcon,
-} from '@elastic/eui';
+import { EuiDragDropContext, EuiDroppable, EuiIcon } from '@elastic/eui';
 
 import { TreenavCategory } from './TreenavCategory';
 import { useStore } from '../../store/store';
