@@ -13,9 +13,11 @@ import { ROUTES } from '../constants/constants';
 import { useStore } from '../store/store';
 import Colors from '../styles/Colors';
 
-const COOKBOOK_PARAM = 'cookbooks';
-const GUIDE_PARAM = 'recipes';
-const SECTION_PARAM = 'sections';
+enum ParamIndex {
+  COOKBOOK = 0,
+  GUIDE = 1,
+  SECTION = 2,
+}
 
 const init = async () => {
   let guides = [];
@@ -23,7 +25,7 @@ const init = async () => {
   let section;
   const cookbooks = await HttpService.get(ROUTES.COOKBOOKS);
   const cookbook = cookbooks.find(
-    _cookbook => _cookbook._id === getParamId(COOKBOOK_PARAM)
+    _cookbook => _cookbook._id === getParamId(ParamIndex.COOKBOOK)
   );
 
   for (const cookbook of cookbooks) {
@@ -31,8 +33,8 @@ const init = async () => {
     guides = guides.concat(_guides);
   }
 
-  const guideId = getParamId(GUIDE_PARAM);
-  const sectionId = getParamId(SECTION_PARAM);
+  const guideId = getParamId(ParamIndex.GUIDE);
+  const sectionId = getParamId(ParamIndex.SECTION);
   const decodedSectionId = decodeURIComponent(decodeURIComponent(sectionId));
 
   if (sectionId != null && guideId != null && cookbook != null) {
@@ -47,11 +49,10 @@ const init = async () => {
   useStore.setState({ cookbook, cookbooks, guides, guide, section });
 };
 
-const getParamId = param => {
+const getParamId = (index: ParamIndex): string => {
   const pathArray = window.location.pathname.split('/');
-  const cookbookIndex = pathArray.findIndex(path => path === param);
-  if (cookbookIndex >= 0 && pathArray[cookbookIndex + 1]) {
-    return pathArray[cookbookIndex + 1];
+  if (index >= 0 && pathArray[index + 1]) {
+    return pathArray[index + 1];
   } else return null;
 };
 

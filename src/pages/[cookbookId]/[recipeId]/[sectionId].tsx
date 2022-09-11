@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useStore } from '../../../../../../store/store';
-import { CookbookSection } from '../../../../../../components/Cookbook/CookbookGuide/CookbookSection/CookbookSection';
+import { CookbookSection } from '../../../components/Cookbook/CookbookGuide/CookbookSection/CookbookSection';
+import { useStore } from '../../../store/store';
 
 const init = async (sectionId: string) => {
   useStore.getState().setSectionFromGuidesStore(sectionId);
