@@ -49,7 +49,7 @@ const init = async () => {
   useStore.setState({ cookbook, cookbooks, guides, guide, section });
 };
 
-const getParamId = index => {
+const getParamId = (index: ParamIndex): string => {
   const pathArray = window.location.pathname.split('/');
   if (index >= 0 && pathArray[index + 1]) {
     return pathArray[index + 1];
