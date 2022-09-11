@@ -13,9 +13,9 @@ import { ROUTES } from '../constants/constants';
 import { useStore } from '../store/store';
 import Colors from '../styles/Colors';
 
-const COOKBOOK_PARAM = 'cookbooks';
-const GUIDE_PARAM = 'recipes';
-const SECTION_PARAM = 'sections';
+const COOKBOOK_PARAM = 0;
+const GUIDE_PARAM = 1;
+const SECTION_PARAM = 2;
 
 const init = async () => {
   let guides = [];
@@ -47,9 +47,8 @@ const init = async () => {
   useStore.setState({ cookbook, cookbooks, guides, guide, section });
 };
 
-const getParamId = param => {
+const getParamId = cookbookIndex => {
   const pathArray = window.location.pathname.split('/');
-  const cookbookIndex = pathArray.findIndex(path => path === param);
   if (cookbookIndex >= 0 && pathArray[cookbookIndex + 1]) {
     return pathArray[cookbookIndex + 1];
   } else return null;
