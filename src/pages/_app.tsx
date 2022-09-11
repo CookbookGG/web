@@ -31,8 +31,8 @@ const init = async () => {
     guides = guides.concat(_guides);
   }
 
-  let guideId = getParamId(GUIDE_PARAM);
-  let sectionId = getParamId(SECTION_PARAM);
+  const guideId = getParamId(GUIDE_PARAM);
+  const sectionId = getParamId(SECTION_PARAM);
   const decodedSectionId = decodeURIComponent(decodeURIComponent(sectionId));
 
   if (sectionId != null && guideId != null && cookbook != null) {

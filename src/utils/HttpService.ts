@@ -35,17 +35,17 @@ class HttpService {
   }
 
   async update(route, id, params?) {
-    const res = await axios.patch(route + '/' + id, params);
+    const res = await axios.patch(`${route}/${id}`, params);
     return res.data;
   }
 
   async getById(route, id) {
-    const res = await axios.get(route + '/' + id);
+    const res = await axios.get(`${route}/${id}`);
     return res.data;
   }
 
   async delete(route, id) {
-    return await axios.delete(route + '/' + id);
+    return await axios.delete(`${route}/${id}`);
   }
 
   async create(route, params) {

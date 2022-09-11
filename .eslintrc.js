@@ -6,6 +6,7 @@ module.exports = {
   ],
   plugins: ['prettier'],
   rules: {
+    'react/no-unknown-property': 'off',
     // In an ideal world, we'd never have to use @ts-ignore, but that's not
     // possible right now.
     '@typescript-eslint/ban-ts-ignore': 'off',
