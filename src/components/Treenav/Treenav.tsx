@@ -1,20 +1,14 @@
 import * as React from 'react';
-import {
-  EuiDragDropContext,
-  euiDragDropReorder,
-  EuiDroppable,
-  EuiIcon,
-} from '@elastic/eui';
+import { EuiDragDropContext, EuiDroppable, EuiIcon } from '@elastic/eui';
 
 import { TreenavCategory } from './TreenavCategory';
 import { useStore } from '../../store/store';
 import { useRouter } from 'next/router';
 import styles from './Treenav.styles';
 
-interface TreeNavProps {}
-
-export const Treenav: React.FC<TreeNavProps> = () => {
-  const { cookbook, user, guides } = useStore(state => state);
+export const Treenav: React.FC = () => {
+  const { cookbook, user, getGuidesInCookbook } = useStore(state => state);
+  const [guides, setGuides] = React.useState(getGuidesInCookbook());
   const router = useRouter();
 
   const onDragEnd = async ({ source, destination }: any) => {
@@ -27,16 +21,21 @@ export const Treenav: React.FC<TreeNavProps> = () => {
     // }
   };
 
+  React.useEffect(() => {
+    setGuides(getGuidesInCookbook());
+  }, [cookbook]);
+
   const content = React.useMemo(() => {
     if (!guides) return [];
     return guides.map((guide, index) => (
       <TreenavCategory
+        key={index}
         guide={guide}
         index={index}
         open={index === 0 || guides.length < 5}
       />
     ));
-  }, [guides, cookbook]);
+  }, [guides]);
 
   return (
     <div css={styles.treeNav}>

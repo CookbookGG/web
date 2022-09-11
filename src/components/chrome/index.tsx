@@ -9,7 +9,7 @@ import createCache from '@emotion/cache';
 /**
  * Renders the UI that surrounds the page content.
  */
-const Chrome: FunctionComponent = ({ children }) => {
+const Chrome: FunctionComponent = ({ children }: any) => {
   const { colorMode } = useTheme();
 
   /**

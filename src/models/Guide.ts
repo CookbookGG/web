@@ -1,6 +1,8 @@
+import { Section } from './Section';
+
 export interface Guide {
-  _id?: string;
+  _id: string;
   title: string;
-  sections: Array<any>;
+  sections: Array<Section>;
   tags: Array<any>;
 }

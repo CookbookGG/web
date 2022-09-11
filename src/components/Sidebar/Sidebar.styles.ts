@@ -3,7 +3,6 @@ import Colors from '../../styles/Colors';
 
 const sidebar = css({
   position: 'absolute',
-  width: 500,
   height: '100vh',
   display: 'flex',
 });

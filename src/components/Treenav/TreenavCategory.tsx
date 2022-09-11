@@ -5,15 +5,29 @@ import {
   EuiDroppable,
   EuiIcon,
 } from '@elastic/eui';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useStore } from '../../store/store';
 import { BiChevronRight, BiChevronDown } from 'react-icons/bi';
 import styles from './Treenav.styles';
+import { Section } from '../../models/Section';
+import { Guide } from '../../models/Guide';
 
-export const TreenavCategory = ({ guide, index, open }) => {
-  const { guides } = useStore(state => state);
+interface TreenavCateGoryProps {
+  guide: Guide;
+  index: number;
+  open: boolean;
+}
+
+export const TreenavCategory: React.FC<TreenavCateGoryProps> = ({
+  guide,
+  index,
+  open,
+}: TreenavCateGoryProps) => {
+  const { cookbook, cookbooks, guides } = useStore(state => state);
   const [collapsed, setCollapsed] = React.useState<boolean>(!open);
   const isDragDisabled = true;
+  const router = useRouter();
 
   const onSectionDragEnd = async (
     { source, destination }: any,
@@ -28,6 +42,19 @@ export const TreenavCategory = ({ guide, index, open }) => {
       );
       guides[guideIndex].sections = items;
     }
+  };
+
+  const onSectionClick = async (event: React.MouseEvent, section: Section) => {
+    event.preventDefault(); // I've seen this used for a lot of onClick methods, does this do anything here/wanna explain what it is? LOL
+    router.push({
+      pathname:
+        '/cookbooks/[cookbookId]/recipes/[recipeId]/sections/[sectionId]',
+      query: {
+        cookbookId: cookbook._id,
+        recipeId: guide._id,
+        sectionId: encodeURIComponent(section.title),
+      },
+    });
   };
 
   if (!guide) return null;
@@ -81,7 +108,11 @@ export const TreenavCategory = ({ guide, index, open }) => {
                           isDragDisabled={isDragDisabled}>
                           {provided => {
                             return (
-                              <div css={styles.itemInner} onClick={() => {}}>
+                              <div
+                                css={styles.itemInner}
+                                onClick={event => {
+                                  onSectionClick(event, section);
+                                }}>
                                 <span {...provided.dragHandleProps}>
                                   <EuiIcon type="document" css={styles.icon} />
                                 </span>

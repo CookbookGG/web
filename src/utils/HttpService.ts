@@ -3,11 +3,12 @@ import axiosLib from 'axios';
 import { ENV } from '../constants/constants';
 import { useStore } from '../store/store';
 
-const user = useStore.getState().user;
+// How should we initialize the HttpService with the user from state if the initialization of the zustand store uses this service?
+// const user = useStore.getState().user;
 export const axios = axiosLib.create({
   baseURL: ENV.API_URL,
   timeout: 300000,
-  ...(user && { headers: { Authorization: `Bearer ${user.token}` } }),
+  //...(user && { headers: { Authorization: `Bearer ${user.token}` } }),
 });
 
 // Add a response interceptor
@@ -34,17 +35,17 @@ class HttpService {
   }
 
   async update(route, id, params?) {
-    const res = await axios.patch(route + '/' + id, params);
+    const res = await axios.patch(`${route}/${id}`, params);
     return res.data;
   }
 
   async getById(route, id) {
-    const res = await axios.get(route + '/' + id);
+    const res = await axios.get(`${route}/${id}`);
     return res.data;
   }
 
   async delete(route, id) {
-    return await axios.delete(route + '/' + id);
+    return await axios.delete(`${route}/${id}`);
   }
 
   async create(route, params) {
