@@ -10,14 +10,10 @@ export interface StreamItemProps {
   onlineStatus: string;
 }
 
-function capitalize(s) {
-  return s && s[0].toUpperCase() + s.slice(1);
-}
-
 const StreamItem: React.FC<StreamItemProps> = props => {
   return (
     <li css={styles.streamItem}>
-      <EuiAvatar size="m" name={capitalize(props.stream)}></EuiAvatar>
+      <EuiAvatar size="m" name={props.stream[0].toUpperCase()}></EuiAvatar>
       <div css={styles.streamerInfo}>
         <a
           css={styles.streamerInfoText}
