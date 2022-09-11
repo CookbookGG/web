@@ -2,7 +2,7 @@ import create from 'zustand';
 import { ROUTES } from '../constants/constants';
 import { Cookbook } from '../models/Cookbook';
 import { Guide } from '../models/Guide';
-import { SectionModel } from '../models/Section';
+import { Section } from '../models/Section';
 import { User } from '../models/User';
 import HttpService from '../utils/HttpService';
 
@@ -11,11 +11,13 @@ export interface IStore {
   cookbook: Cookbook | null;
   cookbooks: Cookbook[];
   guides: Guide[];
-  section: SectionModel;
+  guide: Guide;
+  section: Section;
   swipeMargin: number;
   swipeLeft: () => void;
   swipeRight: () => void;
   updateGuides: (guides: Guide[]) => void;
+  getGuidesInCookbook: () => Guide[];
   setGuidesFromCookbookAPI: (cookbook: Cookbook) => void;
   setSectionFromGuidesStore: (sectionId: string) => void;
 }
@@ -26,6 +28,7 @@ export const useStore = create<IStore>((set, get) => {
     cookbook: null,
     cookbooks: [],
     guides: [],
+    guide: null,
     section: null,
     swipeMargin: 0,
     swipeRight: () => set(() => ({ swipeMargin: 600 })),
@@ -33,21 +36,28 @@ export const useStore = create<IStore>((set, get) => {
     updateGuides: guides => {
       set(() => ({ guides }));
     },
-    setGuidesFromCookbookAPI: async cookbook => {
-      // Might be worth separating stores we use the API? idk
-      const response = await HttpService.get(ROUTES.GUIDES(cookbook._id));
 
-      set({ guides: await response });
+    setGuidesFromCookbookAPI: async cookbook => {
+      const guides = await HttpService.get(ROUTES.GUIDES(cookbook._id));
+      set({ guides });
+    },
+
+    getGuidesInCookbook: () => {
+      const { cookbook, guides } = get();
+      if (cookbook == null) return [];
+      return guides.filter(guide => {
+        return cookbook.guides.includes(guide._id);
+      });
     },
 
     setSectionFromGuidesStore: sectionId => {
       const guideSections = get().guides.flatMap(guide => guide.sections);
-      const decodedSectionId = decodeURIComponent(sectionId); // Should this be done here?
+      const decodedSectionId = decodeURIComponent(sectionId);
       const section = guideSections.find(
-        guideSection => guideSection.title == decodedSectionId
+        guideSection => guideSection.title === decodedSectionId
       );
 
-      set(() => ({ section }));
+      set({ section });
     },
   };
 

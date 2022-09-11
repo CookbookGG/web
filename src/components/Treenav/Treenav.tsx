@@ -7,7 +7,8 @@ import { useRouter } from 'next/router';
 import styles from './Treenav.styles';
 
 export const Treenav: React.FC = () => {
-  const { cookbook, user, guides } = useStore(state => state);
+  const { cookbook, user, getGuidesInCookbook } = useStore(state => state);
+  const [guides, setGuides] = React.useState(getGuidesInCookbook());
   const router = useRouter();
 
   const onDragEnd = async ({ source, destination }: any) => {
@@ -20,6 +21,10 @@ export const Treenav: React.FC = () => {
     // }
   };
 
+  React.useEffect(() => {
+    setGuides(getGuidesInCookbook());
+  }, [cookbook]);
+
   const content = React.useMemo(() => {
     if (!guides) return [];
     return guides.map((guide, index) => (
@@ -30,7 +35,7 @@ export const Treenav: React.FC = () => {
         open={index === 0 || guides.length < 5}
       />
     ));
-  }, [guides, cookbook]);
+  }, [guides]);
 
   return (
     <div css={styles.treeNav}>

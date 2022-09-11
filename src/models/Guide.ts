@@ -1,8 +1,8 @@
-import { SectionModel } from './Section';
+import { Section } from './Section';
 
 export interface Guide {
   _id: string;
   title: string;
-  sections: Array<SectionModel>;
+  sections: Array<Section>;
   tags: Array<any>;
 }

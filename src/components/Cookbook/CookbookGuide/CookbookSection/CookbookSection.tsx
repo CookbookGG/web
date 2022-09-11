@@ -2,10 +2,10 @@ import * as React from 'react';
 import { EuiMarkdownFormat, EuiSpacer, EuiTitle } from '@elastic/eui';
 
 import styles from './CookbookSection.styles';
-import { SectionModel } from '../../../../models/Section';
+import { Section } from '../../../../models/Section';
 
 interface CookbookSectionProps {
-  section: SectionModel;
+  section: Section;
 }
 
 export const CookbookSection: React.FC<CookbookSectionProps> = ({

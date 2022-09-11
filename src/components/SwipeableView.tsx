@@ -3,7 +3,7 @@ import { useSwipeable } from 'react-swipeable';
 import { IStore, useStore } from '../store/store';
 import styles from './SwipeableView.styles';
 
-export const SwipeableView: React.FC = ({ children }) => {
+export const SwipeableView = ({ children }: any) => {
   const { swipeLeft, swipeRight } = useStore((state: IStore) => state);
   const handlers = useSwipeable({
     onSwipedLeft: swipeLeft,
