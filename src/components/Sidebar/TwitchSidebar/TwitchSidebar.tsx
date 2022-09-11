@@ -2,7 +2,7 @@ import { EuiAvatar, EuiTitle } from '@elastic/eui';
 
 import styles from './TwitchSidebar.styles';
 export interface TwitchSidebarProps {
-  streamers: Array<string>;
+  streams: Array<string>;
 }
 
 export interface StreamItemProps {
@@ -38,7 +38,7 @@ export const TwitchSidebar: React.FC<TwitchSidebarProps> = props => {
         <h1>Twitch Streams</h1>
       </EuiTitle>
       <ul>
-        {props.streamers.map(streamer => (
+        {props.streams.map(streamer => (
           <StreamItem key={streamer} stream={streamer} onlineStatus="Online" />
         ))}
       </ul>

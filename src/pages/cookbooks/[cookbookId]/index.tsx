@@ -10,9 +10,7 @@ export const CookbookHome: React.FC = () => {
   const router = useRouter();
   const { cookbookId } = router.query;
   const [cookbook, setCookbook] = useState(useStore.getState().cookbook);
-  const [streamers, setStreamers] = useState(
-    useStore.getState().cookbook?.streams
-  );
+  const [streams, setstreams] = useState(useStore.getState().cookbook?.streams);
 
   useEffect(() => {
     const init = async (cookbookId?: string | string[]) => {
@@ -25,7 +23,7 @@ export const CookbookHome: React.FC = () => {
           setCookbook(cookbook);
           const guides = await HttpService.get(ROUTES.GUIDES(cookbook._id));
           useStore.setState({ cookbook, guides });
-          setStreamers(cookbook.streams);
+          setstreams(cookbook.streams);
         }
       }
     };
@@ -35,9 +33,7 @@ export const CookbookHome: React.FC = () => {
 
   return (
     <>
-      {cookbook && streamers && (
-        <TwitchSidebar streamers={streamers}></TwitchSidebar>
-      )}
+      {cookbook && streams && <TwitchSidebar streams={streams}></TwitchSidebar>}
     </>
   );
 };
