@@ -44,7 +44,7 @@ export const Treenav: React.FC = () => {
           <div
             css={styles.nav}
             onClick={() => {
-              router.push(`/cookbooks/${cookbook._id}`);
+              router.push(`/${cookbook._id}`);
             }}>
             <EuiIcon type="home" css={styles.icon} />
             <span>Home</span>

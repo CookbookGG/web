@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
-import { ROUTES } from '../../../constants/constants';
-import HttpService from '../../../utils/HttpService';
-import { useStore } from '../../../store/store';
+import { ROUTES } from '../../constants/constants';
+import HttpService from '../../utils/HttpService';
+import { useStore } from '../../store/store';
 import { EuiText } from '@elastic/eui';
 import { useEffect } from 'react';
 

@@ -48,7 +48,7 @@ export const TreenavCategory: React.FC<TreenavCateGoryProps> = ({
     event.preventDefault(); // I've seen this used for a lot of onClick methods, does this do anything here/wanna explain what it is? LOL
     router.push({
       pathname:
-        '/cookbooks/[cookbookId]/recipes/[recipeId]/sections/[sectionId]',
+        '/[cookbookId]/[recipeId]/[sectionId]',
       query: {
         cookbookId: cookbook._id,
         recipeId: guide._id,

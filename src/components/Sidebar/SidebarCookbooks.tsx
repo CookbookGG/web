@@ -13,7 +13,7 @@ const Cookbook = ({ cookbook }: { cookbook: Cookbook }) => {
   const _cookbook = useStore(state => state.cookbook);
 
   return (
-    <Link href={`/cookbooks/${cookbook._id}`} passHref>
+    <Link href={`/${cookbook._id}`} passHref>
       <div
         css={styles.cookbook}
         style={
