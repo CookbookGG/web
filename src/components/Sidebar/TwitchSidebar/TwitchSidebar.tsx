@@ -35,7 +35,7 @@ export const TwitchSidebar: React.FC<TwitchSidebarProps> = props => {
   return (
     <div css={styles.streamsContainer}>
       <EuiTitle>
-        <h1>Twitch Streams</h1>
+        <h1 css={styles.streamsContainerTitle}>Twitch Streams</h1>
       </EuiTitle>
       <ul>
         {props.streams.map(streamer => (

@@ -3,17 +3,27 @@ import Colors from '../../../styles/Colors';
 
 const streamsContainer = css({
   marginLeft: '500px',
-  backgroundColor: Colors.backgroundAccent,
-  padding: '20px',
+  backgroundColor: Colors.backgroundDark200,
+  padding: '20px 0 0 0',
   display: 'inline-flex',
   flexDirection: 'column',
   borderRadius: '10px',
 });
 
+const streamsContainerTitle = css({
+  fontWeight: 'bold',
+  paddingLeft: '10px',
+  paddingRight: '10px',
+});
+
 const streamItem = css({
-  padding: '20px 0 10px 0',
+  padding: '15px 0 15px 10px',
   display: 'flex',
   flexDirection: 'row',
+  ':hover': {
+    backgroundColor: Colors.backgroundDark,
+  },
+  borderRadius: '5px',
 });
 
 const streamerInfo = css({
@@ -32,4 +42,5 @@ export default {
   streamItem,
   streamerInfo,
   streamerInfoText,
+  streamsContainerTitle,
 };
