@@ -1,8 +1,8 @@
-import * as React from 'react';
 import { EuiMarkdownFormat, EuiSpacer, EuiTitle } from '@elastic/eui';
+import * as React from 'react';
 
-import styles from './CookbookSection.styles';
 import { Section } from '../../../../models/Section';
+import styles from './CookbookSection.styles';
 
 interface CookbookSectionProps {
   section: Section;

@@ -1,7 +1,6 @@
-import qs from 'qs';
 import axiosLib from 'axios';
+import qs from 'qs';
 import { ENV } from '../constants/constants';
-import { useStore } from '../store/store';
 
 // How should we initialize the HttpService with the user from state if the initialization of the zustand store uses this service?
 // const user = useStore.getState().user;

@@ -1,17 +1,17 @@
-import * as React from 'react';
-import App, { AppProps } from 'next/app';
-import Head from 'next/head';
 import { EuiErrorBoundary } from '@elastic/eui';
 import { css, Global } from '@emotion/react';
+import { AppProps } from 'next/app';
+import Head from 'next/head';
+import * as React from 'react';
 import Chrome from '../components/chrome';
-import { Theme } from '../components/theme';
-import { globalStyes } from '../styles/global.styles';
-import { SwipeableView } from '../components/SwipeableView';
 import { Sidebar } from '../components/Sidebar/Sidebar';
-import HttpService from '../utils/HttpService';
+import { SwipeableView } from '../components/SwipeableView';
+import { Theme } from '../components/theme';
 import { ROUTES } from '../constants/constants';
 import { useStore } from '../store/store';
 import Colors from '../styles/Colors';
+import { globalStyes } from '../styles/global.styles';
+import HttpService from '../utils/HttpService';
 
 enum ParamIndex {
   COOKBOOK = 0,

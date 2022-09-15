@@ -18,6 +18,7 @@ const StreamItem: React.FC<StreamItemProps> = props => {
         <a
           css={styles.streamerInfoText}
           target="_blank"
+          rel="noreferrer"
           href={`https://twitch.tv/${props.stream}`}>
           {props.stream}
         </a>
