@@ -174,7 +174,7 @@ const GifMarkdownRenderer = ({ gif }) => {
       for (let i = 0; i < gif.urls.length; i++) {
         const url = gif.urls[i];
 
-        // This uses some stuff from the old API which is currently not present. I will just let it use the standard gfy rn.
+        // TODO: This uses some stuff from the old API which is currently not present. I will just let it use the standard gfy rn.
         /* if (
           url.gif &&
           url.gif.includes('gfy') &&
