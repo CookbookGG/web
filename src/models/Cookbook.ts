@@ -3,7 +3,7 @@ import { Guide } from './Guide';
 export interface Cookbook {
   _id: string;
   roles: any;
-  streamers: string[];
+  streams: string[];
   name: 'string';
   banner_url: 'string';
   guides: string[];

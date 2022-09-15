@@ -2,12 +2,11 @@ import { css } from '@emotion/react';
 import Colors from '../../../styles/Colors';
 
 const streamsContainer = css({
-  marginLeft: '500px',
-  backgroundColor: Colors.backgroundDark200,
   padding: '20px 0 0 0',
   display: 'inline-flex',
   flexDirection: 'column',
   borderRadius: '10px',
+  flexGrow: 1,
 });
 
 const streamsContainerTitle = css({

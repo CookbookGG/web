@@ -5,6 +5,8 @@ const container = css({
   flexDirection: 'column',
   alignItems: 'center',
   padding: '20px 200px 0px 200px',
+  minWidth: '80%',
+  maxWidth: '80%',
 });
 
 export default {
