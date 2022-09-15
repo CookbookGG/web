@@ -47,10 +47,10 @@ export const TreenavCategory: React.FC<TreenavCateGoryProps> = ({
   const onSectionClick = async (event: React.MouseEvent, section: Section) => {
     event.preventDefault(); // I've seen this used for a lot of onClick methods, does this do anything here/wanna explain what it is? LOL
     router.push({
-      pathname: '/[cookbookId]/[recipeId]/[sectionId]',
+      pathname: '/[cookbookId]/[guideId]/[sectionId]',
       query: {
         cookbookId: cookbook._id,
-        recipeId: guide._id,
+        guideId: guide._id,
         sectionId: encodeURIComponent(section.title),
       },
     });
