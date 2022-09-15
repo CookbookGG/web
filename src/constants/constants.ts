@@ -4,7 +4,9 @@ export const ENV = {
 
 export const ROUTES = {
   COOKBOOKS: '/cookbooks',
-  GUIDES: id => `/cookbooks/${id}/guides`,
+  COOKBOOK: cookbookId => `/cookbooks/${cookbookId}`,
+  GUIDES: cookbookId => `/cookbooks/${cookbookId}/guides`,
+  GUIDE: (cookbookId, guideId) => `/cookbooks/${cookbookId}/guides/${guideId}`,
 };
 
 export const DISCORD = {

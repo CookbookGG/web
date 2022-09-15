@@ -17,7 +17,7 @@ export const GlobalProvider = createContext<{
   setColorMode?: (colorMode: string) => void;
 }>({});
 
-export const Theme: FunctionComponent = ({ children }) => {
+export const Theme: FunctionComponent = ({ children }: any) => {
   const [colorMode, setColorMode] = useState('dark');
 
   // on initial mount in the browser, use any theme from local storage

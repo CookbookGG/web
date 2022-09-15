@@ -3,8 +3,9 @@ import Colors from '../styles/Colors';
 
 export default {
   swipeableView: css({
-    height: '100vh',
-    width: '100vw',
+    maxHeight: '100vh',
+    maxWidth: '100vw',
     backgroundColor: Colors.background,
+    overflow: 'hidden',
   }),
 };
