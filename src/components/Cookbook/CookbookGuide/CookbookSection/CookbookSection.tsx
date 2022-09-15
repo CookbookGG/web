@@ -4,6 +4,9 @@ import { EuiMarkdownFormat, EuiSpacer, EuiTitle } from '@elastic/eui';
 import styles from './CookbookSection.styles';
 import { Section } from '../../../../models/Section';
 
+/* Plugins */
+import { parsingList, processingList } from '../../../../plugins';
+
 interface CookbookSectionProps {
   section: Section;
 }
@@ -17,7 +20,12 @@ export const CookbookSection: React.FC<CookbookSectionProps> = ({
         <h2>{section.title}</h2>
       </EuiTitle>
       <EuiSpacer />
-      <EuiMarkdownFormat>{section.body}</EuiMarkdownFormat>
+      <EuiMarkdownFormat
+        css={styles.markdownContainer}
+        parsingPluginList={parsingList}
+        processingPluginList={processingList}>
+        {section.body}
+      </EuiMarkdownFormat>
     </div>
   );
 };
