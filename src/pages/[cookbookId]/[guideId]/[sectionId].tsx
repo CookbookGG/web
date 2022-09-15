@@ -1,25 +1,44 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { CookbookSection } from '../../../components/Cookbook/CookbookGuide/CookbookSection/CookbookSection';
+import { Section } from '../../../models/Section';
 import { useStore } from '../../../store/store';
 
-const init = async (sectionId: string) => {
-  useStore.getState().setSectionFromGuidesStore(sectionId);
-};
-
-export const Section: React.FC = () => {
+export const SectionComponent: React.FC = () => {
   const router = useRouter();
-  const { sectionId } = router.query;
+  const { sectionId, guideId } = router.query;
   const { section } = useStore(state => state);
+  const [prevSection, setPrevSection] = useState<Section>();
+  const [nextSection, setNextSection] = useState<Section>();
 
   useEffect(() => {
-    init(sectionId?.toString());
+    const init = async (sectionId: string, guideId: string) => {
+      useStore.getState().setSectionFromGuidesStore(sectionId);
+      useStore.getState().setGuideFromGuideId(guideId);
+
+      const guide = useStore.getState().guide;
+      const section = useStore.getState().section;
+      // TODO: This does not work on reload
+      const sectionIndex = guide.sections.findIndex(
+        aSection => aSection.title === section.title
+      );
+
+      setPrevSection(guide.sections[sectionIndex - 1]);
+      setNextSection(guide.sections[sectionIndex + 1]);
+    };
+    // The ?.toString() is really annoying, can we avoid that somehow?
+    init(sectionId?.toString(), guideId?.toString());
   }, [sectionId]);
 
   if (section) {
     return (
       <>
-        <CookbookSection section={section} />
+        <CookbookSection
+          section={section}
+          prevSection={prevSection}
+          nextSection={nextSection}
+        />
       </>
     );
   }
@@ -27,4 +46,4 @@ export const Section: React.FC = () => {
   return <>Loading..</>;
 };
 
-export default Section;
+export default SectionComponent;

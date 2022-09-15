@@ -17,6 +17,7 @@ export interface IStore {
   swipeLeft: () => void;
   swipeRight: () => void;
   updateGuides: (guides: Guide[]) => void;
+  setGuideFromGuideId: (guideId: string) => void;
   getGuidesInCookbook: () => Guide[];
   setGuidesFromCookbookAPI: (cookbook: Cookbook) => void;
   setSectionFromGuidesStore: (sectionId: string) => void;
@@ -35,6 +36,11 @@ export const useStore = create<IStore>((set, get) => {
     swipeLeft: () => set({ swipeMargin: 0 }),
     updateGuides: guides => {
       set(() => ({ guides }));
+    },
+
+    setGuideFromGuideId: guideId => {
+      const guide = get().guides.find(guide => guide._id === guideId);
+      set({ guide });
     },
 
     setGuidesFromCookbookAPI: async cookbook => {
