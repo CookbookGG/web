@@ -39,7 +39,7 @@ function TweetMarkdownParser() {
     }
 
     return eat(tokenMatch.input)({
-      type: 'tweetPlugin',
+      type: 'TweetPlugin',
       tweet: { id },
     });
   }
@@ -52,7 +52,7 @@ function TweetMarkdownParser() {
   methods.unshift('tweeter');
 }
 
-const GifMarkdownRenderer = ({ tweet }) => {
+const TweetMarkdownRenderer = ({ tweet }) => {
   return (
     <>
       <Tweet tweetId={tweet.id} />
@@ -60,9 +60,9 @@ const GifMarkdownRenderer = ({ tweet }) => {
   );
 };
 
-export const tweetPlug = {
-  name: 'tweetPlugin',
-  render: GifMarkdownRenderer,
+export const TweetPlug = {
+  name: 'TweetPlugin',
+  render: TweetMarkdownRenderer,
   parse: TweetMarkdownParser,
   // ui: GifPlugin,
 };

@@ -35,7 +35,7 @@ function formattedUrl(url) {
 //   },
 // };
 
-function iFrameParser() {
+function IFrameParser() {
   // @ts-ignore
   const Parser = this.Parser;
   const tokenizers = Parser.prototype.inlineTokenizers;
@@ -66,7 +66,7 @@ function iFrameParser() {
   methods.unshift('iframe');
 }
 
-const iFramePluginRenderer = ({ fixedUrl }) => {
+const IFramePluginRenderer = ({ fixedUrl }) => {
   function useOnScreen(ref) {
     const [isIntersecting, setIntersecting] = useState(false);
 
@@ -99,6 +99,7 @@ const iFramePluginRenderer = ({ fixedUrl }) => {
             allowFullScreen={true}
             scrolling="no"
             src={fixedUrl}
+            title={fixedUrl}
           />
         ) : (
           <>Not Visible</>
@@ -108,9 +109,9 @@ const iFramePluginRenderer = ({ fixedUrl }) => {
   );
 };
 
-export const vidPlug = {
+export const VidPlug = {
   name: 'IFramePlugin',
-  render: iFramePluginRenderer,
-  parse: iFrameParser,
+  render: IFramePluginRenderer,
+  parse: IFrameParser,
   // ui: IFramePlugin,
 };

@@ -1,8 +1,8 @@
 /* Plugins */
-import { gifPlug } from './GifPlugin';
-import { vidPlug } from './iFramePlugin';
-import { loopPlug } from './loopedPlugin';
-import { tweetPlug } from './TwitterPlugin';
+import { GifPlug } from './GifPlugin';
+import { VidPlug } from './IFramePlugin';
+import { LoopPlug } from './LoopedPlugin';
+import { TweetPlug } from './TwitterPlugin';
 
 /* Defaults */
 import {
@@ -11,13 +11,13 @@ import {
   getDefaultEuiMarkdownUiPlugins,
 } from '@elastic/eui';
 
-const plugs = [gifPlug, vidPlug, loopPlug, tweetPlug];
+const plugs = [GifPlug, VidPlug, LoopPlug, TweetPlug];
 
 export const processingList = getDefaultEuiMarkdownProcessingPlugins();
 export const parsingList = getDefaultEuiMarkdownParsingPlugins();
 export const uiList = getDefaultEuiMarkdownUiPlugins();
 
-plugs.forEach((plug) => {
+plugs.forEach(plug => {
   const { name, render, parse } = plug;
   processingList[1][1].components[name] = render;
   parsingList.push(parse);

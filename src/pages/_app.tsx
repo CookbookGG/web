@@ -70,9 +70,7 @@ const EuiApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         <title>CookBook</title>
       </Head>
       <Global styles={globalStyes} />
-      {/* @ts-expect-error */}
       <Theme>
-        {/* @ts-expect-error */}
         <Chrome>
           <EuiErrorBoundary>
             <SwipeableView>

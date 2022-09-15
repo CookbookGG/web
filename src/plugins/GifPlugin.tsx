@@ -94,7 +94,7 @@ function GifMarkdownParser() {
     }
 
     return eat(tokenMatch.input)({
-      type: 'gifPlugin',
+      type: 'GifPlugin',
       gif: { urls },
     });
   }
@@ -217,11 +217,11 @@ const GifMarkdownRenderer = ({ gif }) => {
                         </video>
                       </EuiHideFor>
                       <EuiHideFor sizes={['m', 'l', 'xl']}>
-                        <img src={url.gif}></img>
+                        <img alt={url.gif} src={url.gif}></img>
                       </EuiHideFor>
                     </>
                   ) : (
-                    <img src={url}></img>
+                    <img alt={url} src={url}></img>
                   )}
                 </>
               ) : (
@@ -237,8 +237,8 @@ const GifMarkdownRenderer = ({ gif }) => {
   );
 };
 
-export const gifPlug = {
-  name: 'gifPlugin',
+export const GifPlug = {
+  name: 'GifPlugin',
   render: GifMarkdownRenderer,
   parse: GifMarkdownParser,
   // ui: GifPlugin,

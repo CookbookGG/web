@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { EuiAspectRatio } from '@elastic/eui';
 
@@ -30,7 +30,7 @@ function formattedUrl(url) {
 //   },
 // };
 
-function loopedParser() {
+function LoopedParser() {
   // @ts-ignore
   const Parser = this.Parser;
   const tokenizers = Parser.prototype.inlineTokenizers;
@@ -61,7 +61,7 @@ function loopedParser() {
   methods.unshift('looper');
 }
 
-const loopedPluginRenderer = ({ fixedUrl }) => {
+const LoopedPluginRenderer = ({ fixedUrl }) => {
   function useOnScreen(ref) {
     const [isIntersecting, setIntersecting] = useState(false);
 
@@ -95,6 +95,7 @@ const loopedPluginRenderer = ({ fixedUrl }) => {
             allowFullScreen={true}
             scrolling="no"
             src={fixedUrl}
+            title={fixedUrl}
           />
         )}
       </EuiAspectRatio>
@@ -102,9 +103,9 @@ const loopedPluginRenderer = ({ fixedUrl }) => {
   );
 };
 
-export const loopPlug = {
+export const LoopPlug = {
   name: 'LoopedPlugin',
-  render: loopedPluginRenderer,
-  parse: loopedParser,
+  render: LoopedPluginRenderer,
+  parse: LoopedParser,
   // ui: IFramePlugin,
 };
