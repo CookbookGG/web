@@ -2,7 +2,8 @@ import { css } from '@emotion/react';
 import Colors from '../../styles/Colors';
 
 const sidebar = css({
-  position: 'absolute',
+  //position: 'absolute',
+  // IIRC @Steffan mentioned don't remove this, but i dont understand why and it makes the layouts more difficult rn
   height: '100vh',
   display: 'flex',
 });
@@ -22,7 +23,7 @@ const cookbooks = css({
   alignItems: 'center',
   backgroundColor: Colors.backgroundDark200,
   width: 64,
-  height: '100%',
+  height: '100vh',
   paddingTop: 8,
 });
 

@@ -3,10 +3,13 @@ export const ENV = {
 };
 
 export const ROUTES = {
+  USERS: '/users',
+  USER: (userId: string) => `/users/${userId}`,
   COOKBOOKS: '/cookbooks',
-  COOKBOOK: cookbookId => `/cookbooks/${cookbookId}`,
-  GUIDES: cookbookId => `/cookbooks/${cookbookId}/guides`,
-  GUIDE: (cookbookId, guideId) => `/cookbooks/${cookbookId}/guides/${guideId}`,
+  COOKBOOK: (cookbookId: string) => `/cookbooks/${cookbookId}`,
+  GUIDES: (cookbookId: string) => `/cookbooks/${cookbookId}/guides`,
+  GUIDE: (cookbookId: string, guideId: string) =>
+    `/cookbooks/${cookbookId}/guides/${guideId}`,
 };
 
 export const DISCORD = {

@@ -5,6 +5,7 @@ import HttpService from '../../utils/HttpService';
 import { useStore } from '../../store/store';
 import { EuiText } from '@elastic/eui';
 import { useEffect } from 'react';
+import { Sidebar } from '../../components/Sidebar/Sidebar';
 
 const init = async (cookbookId?: string | string[]) => {
   if (cookbookId != null) {
@@ -14,7 +15,7 @@ const init = async (cookbookId?: string | string[]) => {
   }
 };
 
-export const CookbookHome: React.FC = () => {
+export const CookbookIndexHome: React.FC = () => {
   const router = useRouter();
   const { cookbookId } = router.query;
 
@@ -23,10 +24,11 @@ export const CookbookHome: React.FC = () => {
   }, [cookbookId]);
 
   return (
-    <>
+    <div className="sidebarLayout">
+      <Sidebar />
       <EuiText>You are in Cookbook: {cookbookId}</EuiText>
-    </>
+    </div>
   );
 };
 
-export default CookbookHome;
+export default CookbookIndexHome;

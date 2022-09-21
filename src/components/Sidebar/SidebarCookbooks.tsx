@@ -34,9 +34,11 @@ export const SidebarCookbooks: React.FC = () => {
 
   return (
     <div css={styles.cookbooks}>
-      <div css={styles.logo}>
-        <Image src={logo} alt="" css={styles.logo} loader={imageLoader} />
-      </div>
+      <Link href={'/'} passHref>
+        <div css={styles.logo}>
+          <Image src={logo} alt="" css={styles.logo} loader={imageLoader} />
+        </div>
+      </Link>
       <EuiSpacer css={styles.spacer} size="xs" />
       {cookbooks.map((cb, i) => (
         <Cookbook key={i} cookbook={cb} />

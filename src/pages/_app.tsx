@@ -6,8 +6,8 @@ import { css, Global } from '@emotion/react';
 import Chrome from '../components/chrome';
 import { Theme } from '../components/theme';
 import { globalStyes } from '../styles/global.styles';
-import { SwipeableView } from '../components/SwipeableView';
-import { Sidebar } from '../components/Sidebar/Sidebar';
+import { SwipeableView } from '../components/SwipeableView/SwipeableView';
+
 import HttpService from '../utils/HttpService';
 import { ROUTES } from '../constants/constants';
 import { useStore } from '../store/store';
@@ -24,6 +24,7 @@ const init = async () => {
   let guide;
   let section;
   const cookbooks = await HttpService.get(ROUTES.COOKBOOKS);
+  console.log(cookbooks);
   const cookbook = cookbooks.find(
     _cookbook => _cookbook._id === getParamId(ParamIndex.COOKBOOK)
   );
@@ -76,11 +77,10 @@ const EuiApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         <Chrome>
           <EuiErrorBoundary>
             <SwipeableView>
-              <Sidebar {...pageProps} />
               <div
                 css={css({
                   flexGrow: 1,
-                  marginLeft: 364,
+                  //marginLeft: 364,
                   overflow: 'auto',
                   height: '100vh',
                   scrollbarWidth: 'auto',

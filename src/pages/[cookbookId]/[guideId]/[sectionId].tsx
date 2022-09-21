@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { CookbookSection } from '../../../components/Cookbook/CookbookGuide/CookbookSection/CookbookSection';
+import { Sidebar } from '../../../components/Sidebar/Sidebar';
 import { useStore } from '../../../store/store';
 
 const init = async (sectionId: string) => {
@@ -18,9 +19,10 @@ export const Section: React.FC = () => {
 
   if (section) {
     return (
-      <>
+      <div className="sidebarLayout">
+        <Sidebar />
         <CookbookSection section={section} />
-      </>
+      </div>
     );
   }
 

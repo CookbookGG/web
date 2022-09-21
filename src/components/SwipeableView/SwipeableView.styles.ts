@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import Colors from '../styles/Colors';
+import Colors from '../../styles/Colors';
 
 export default {
   swipeableView: css({
@@ -7,5 +7,6 @@ export default {
     maxWidth: '100vw',
     backgroundColor: Colors.background,
     overflow: 'hidden',
+    display: 'flex',
   }),
 };

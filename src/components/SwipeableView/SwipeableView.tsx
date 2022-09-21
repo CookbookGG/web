@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSwipeable } from 'react-swipeable';
-import { IStore, useStore } from '../store/store';
+import { IStore, useStore } from '../../store/store';
 import styles from './SwipeableView.styles';
 
 export const SwipeableView = ({ children }: any) => {

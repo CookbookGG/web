@@ -22,4 +22,8 @@ export const globalStyes = css`
   .droppable {
     background-color: transparent !important;
   }
+
+  .sidebarLayout {
+    display: flex;
+  }
 `;
