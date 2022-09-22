@@ -24,7 +24,6 @@ const init = async () => {
   let guide;
   let section;
   const cookbooks = await HttpService.get(ROUTES.COOKBOOKS);
-  console.log(cookbooks);
   const cookbook = cookbooks.find(
     _cookbook => _cookbook._id === getParamId(ParamIndex.COOKBOOK)
   );

@@ -1,16 +1,39 @@
-import * as React from 'react';
+import { EuiAvatar, EuiTitle } from '@elastic/eui';
+import { DISCORD } from '../../../constants/constants';
 import { User } from '../../../models/User';
-import styles from './ChefSidebar.styles';
+import AvatarComponent from '../../AvatarComponent/AvatarComponent';
 
-interface ChefSideBarProps {
-  users: User[];
+import styles from './ChefSidebar.styles';
+export interface ChefSidebarProps {
+  chefs: User[];
 }
 
-export const ChefSidebar: React.FC<ChefSideBarProps> = () => {
+export interface StreamItemProps {
+  chef: User;
+}
+
+const ChefItem: React.FC<StreamItemProps> = props => {
   return (
-    <div css={styles.sidebar}>
-      <SidebarCookbooks />
-      <SidebarMain />
-    </div>
+    <li>
+      <AvatarComponent
+        avatarSize="l"
+        name={props.chef.username}
+        avatarImage={DISCORD.getAvatarUrl(
+          props.chef.discord_id,
+          props.chef.avatar
+        )}>
+        <p>{props.chef.username}</p>
+      </AvatarComponent>
+    </li>
+  );
+};
+
+export const ChefSidebar: React.FC<ChefSidebarProps> = props => {
+  return (
+    <ul css={styles.chefsContainer}>
+      {props.chefs.map(chef => (
+        <ChefItem key={chef.username} chef={chef} />
+      ))}
+    </ul>
   );
 };

@@ -20,42 +20,46 @@ const Index: React.FC = () => {
   const cookbooks = useStore(state => state.cookbooks);
   const [chefs, setChefs] = useState(null);
   useEffect(() => {
-    const init = async () => {
-      const users = HttpService.get(ROUTES.USERS).then(res => {
-        console.log(res);
+    const init = () => {
+      HttpService.get(ROUTES.USERS).then(users => {
+        // This whole shebang is to get all user objects which are chefs in any cookbook. Unsure if optimized but it works
         const cookbookRoles = cookbooks.flatMap(cookbook => cookbook.roles);
-
         let cookbookRoleArray = [];
 
         cookbookRoles.forEach(cookbook => {
-          console.log(separateObject(cookbook));
           cookbookRoleArray = cookbookRoleArray.concat(
             separateObject(cookbook)
           );
         });
 
-        const uniqueRoleArray = [
-          ...new Map(cookbookRoleArray.map(item => [item[key], item])).values(),
-        ];
-        console.log(uniqueRoleArray);
+        cookbookRoleArray = cookbookRoleArray.filter(
+          item => Object.values(item)[0] === 'chef'
+        );
 
-        setChefs(res);
+        const uniqueRoleArray = [
+          ...new Set(cookbookRoleArray.map(item => Object.keys(item)[0])),
+        ];
+
+        users = users.filter(user => uniqueRoleArray.includes(user.uid));
+
+        setChefs(users);
       });
     };
 
     init();
 
     useStore.setState(state => (state.cookbook = null));
-  }, []);
+  }, [cookbooks]);
 
-  return (
-    chefs && (
+  if (cookbooks) {
+    return (
       <div className="sidebarLayout">
         <SidebarCookbooks />
-        <CookbookHome chefs={chefs} />
+        {chefs && <CookbookHome chefs={chefs} />}
       </div>
-    )
-  );
+    );
+  }
+  return <>Loading</>;
 };
 
 export default Index;

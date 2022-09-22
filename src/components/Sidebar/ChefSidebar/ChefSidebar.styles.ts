@@ -1,5 +1,22 @@
 import { css } from '@emotion/react';
+import Colors from '../../../styles/Colors';
 
-const sidebarContent = css({});
+const chefsContainer = css({
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  borderRadius: '10px',
+  flexGrow: 1,
+  justifyContent: 'space-around',
+});
 
-export default {};
+const chefsContainerTitle = css({
+  fontWeight: 'bold',
+  paddingLeft: '10px',
+  paddingRight: '10px',
+});
+
+export default {
+  chefsContainer,
+  chefsContainerTitle,
+};
