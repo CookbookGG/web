@@ -33,6 +33,8 @@ export const Routes = {
     `/cookbooks/${cookbookId}/guides/${guideId}/sections/${sectionId}`,
   SECTION_GET_FROM_NAME: (cookbookName, guideName, sectionName) =>
     `/cookbookName/${cookbookName}/guideName/${guideName}/sectionName/${sectionName}`,
+  SECTION_VIEW_COUNT: (cookbookId, guideId, sectionId) =>
+    `/cookbooks/${cookbookId}/guides/${guideId}/sections/${sectionId}/viewcounts`,
   COACHES_GET: () => `/users`,
 };
 

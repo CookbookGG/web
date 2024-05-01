@@ -26,6 +26,7 @@
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
     "codemirror": "^6.0.1",
+    "cookies-next": "^4.1.1",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
     "jsx-to-string": "^1.4.0",

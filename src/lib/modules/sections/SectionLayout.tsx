@@ -13,6 +13,18 @@ import { useCookbookStore } from "@/store/store";
 import { useShallow } from "zustand/react/shallow";
 import Image from "next/image";
 import { User } from "../users/UserTypes";
+import { getCookie, setCookie } from "cookies-next";
+import { EyeIcon } from "@heroicons/react/24/outline";
+
+async function increaseViewCount(cookbookId, guideId, sectionId) {
+  try {
+    await HttpService.post(
+      Routes.SECTION_VIEW_COUNT(cookbookId, guideId, sectionId),
+    );
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 export const SectionLayout = ({
   guideUrl,
@@ -33,6 +45,13 @@ export const SectionLayout = ({
   const { isEditing, setIsEditing, body, setBody, canEdit } = useEditing({
     initialBody: section?.body ?? "",
   });
+
+  React.useEffect(() => {
+    if (getCookie(section.id) == null && cookbook != null) {
+      increaseViewCount(cookbook.id, guide.id, section.id);
+      setCookie(section.id, section.name, { maxAge: 60 * 5 });
+    }
+  }, []);
 
   const handleSetEditing = (value: boolean) => {
     setIsEditing(value);
@@ -92,9 +111,7 @@ export const SectionLayout = ({
                       key={author.id}
                     >
                       <Image
-                        className={classNames(
-                          "w-6 h-6 rounded-full",
-                        )}
+                        className={classNames("w-6 h-6 rounded-full")}
                         src={Routes.DISCORD_AVATAR(
                           author.discordId,
                           author.discordAvatar,
@@ -110,13 +127,21 @@ export const SectionLayout = ({
                     month: "short",
                     year: "numeric",
                   })}
+                  {section.viewCount != null && section.viewCount > 0 && (
+                    <div className="flex items-center gap-x-2">
+                      <EyeIcon className="h-4 w-4" />
+                      {section.viewCount}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           )}
-          {isEditing && user != null
-            ? <Editor body={section.body} onChange={handleSectionEdit} />
-            : <Markdown body={section?.body} />}
+          {isEditing && user != null ? (
+            <Editor body={section.body} onChange={handleSectionEdit} />
+          ) : (
+            <Markdown body={section?.body} />
+          )}
         </div>
       </>
     </div>
