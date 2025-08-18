@@ -1,31 +1,38 @@
-This is the repository for the frontend of [cookbook.gg](https://cookbook.gg)!
-## Getting Started
-1. Install all project dependencies using your preferred command. Some examples are using `yarn`, `npm i`, or `pnpm`
-2. Populate `.env` file with variables `API_URL` and `NEXT_PUBLIC_API_URL` both set to the URL for your locally ran API server
-    - if you don't have the API set up locally then go take a peek at [the api repo](https://github.com/CookbookGG/api) which will tell you exactly how to set it up
-3. Now you can run the development server using any of the below commands:
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+# sv
+
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+
+## Creating a project
+
+If you're seeing this, you've probably already done this step. Congrats!
+
+```sh
+# create a new project in the current directory
+npx sv create
+
+# create a new project in my-app
+npx sv create my-app
 ```
-4. Open the served website at the URL shown in the shell output. The default port will be `3000` [http://localhost:3000](http://localhost:3000)
-5. That's it! Now have fun and be free
 
-## Issues
-If you have any issues with the local setup process or the API in general please log an issue for other maintainers to help out
+## Developing
 
-## Be Kind Always :green_heart:
-README written by stump - coronary - vera
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-## Learn More
+```sh
+npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Building
 
+To create a production version of your app:
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+```sh
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
