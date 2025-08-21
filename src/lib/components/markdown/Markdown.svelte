@@ -6,6 +6,11 @@
   import { gif } from "./extensions/gif.svelte";
   import ListItem from "./renderers/ListItem.svelte";
   import List from "./renderers/List.svelte";
+  import Table from "./renderers/Table.svelte";
+  import TableCell from "./renderers/TableCell.svelte";
+  import TableRow from "./renderers/TableRow.svelte";
+  import Paragraph from "./renderers/Paragraph.svelte";
+  import Code from "./renderers/Code.svelte";
 
   const { text } = $props();
 
@@ -18,6 +23,11 @@
     heading: HeadingRenderer,
     list: List,
     listitem: ListItem,
+    table: Table,
+    tablecell: TableCell,
+    tablerow: TableRow,
+    paragraph: Paragraph,
+    codespan: Code,
   } as any;
 </script>
 

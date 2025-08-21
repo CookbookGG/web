@@ -28,7 +28,10 @@
 </script>
 
 <div class="flex w-full flex-wrap justify-center gap-4">
-  <div bind:this={elementRef} class="aspect-video w-full max-w-[900px] rounded">
+  <div
+    bind:this={elementRef}
+    class="w-full max-w-[900px] rounded flex flex-wrap gap-4"
+  >
     {#each gifs as gif, index (index)}
       {#if isGif(gif)}
         {#if inView}
@@ -38,7 +41,7 @@
             src={gif}
           />
         {:else}
-          <div class="aspect-video" />
+          <div class="aspect-video w-full max-w-[900px]" />
         {/if}
       {:else}
         <video
@@ -50,7 +53,7 @@
           {#if inView}
             <source src={gif} />
           {:else}
-            <div class="aspect-video" />
+            <div class="aspect-video w-full max-w-[900px]" />
           {/if}
         </video>
       {/if}
