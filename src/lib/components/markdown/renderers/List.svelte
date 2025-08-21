@@ -1,13 +1,30 @@
 <script lang="ts">
-  const { ordered, children } = $props();
+  import { cn } from "$lib/utils";
+  import type { Snippet } from "svelte";
+
+  interface Props {
+    ordered: boolean;
+    children: Snippet;
+  }
+
+  const { ordered, children }: Props = $props();
+  const styles = "tracking-wide leading-loose pl-8";
 </script>
 
+{#snippet OrderedList()}
+  <ul class={cn(styles, "list-decimal")}>
+    {@render children()}
+  </ul>
+{/snippet}
+
+{#snippet UnorderedList()}
+  <ul class={cn(styles, "list-disc")}>
+    {@render children()}
+  </ul>
+{/snippet}
+
 {#if ordered}
-  <ul class="tracking-wide leading-loose pl-8 list-decimal">
-    {@render children()}
-  </ul>
+  {@render OrderedList()}
 {:else}
-  <ul class="tracking-wide leading-loose pl-8 list-disc">
-    {@render children()}
-  </ul>
+  {@render UnorderedList()}
 {/if}
